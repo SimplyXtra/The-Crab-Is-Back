@@ -3,6 +3,11 @@ extends Node2D
 var playerTilePosition := Vector2.ZERO
 var inventoryItems := ["stone", "wood", "food"]
 
+func _ready() -> void:
+	for i in range (len(inventoryItems)):
+		inventoryItems[i] += "_i"
+	print(inventoryItems)
+
 func _process(_delta):
 	playerTilePosition = move()
 	global_position = playerTilePosition * Main.tileSize
@@ -14,7 +19,7 @@ func move():
 	
 	#Check movement location
 	var tileItem = Main.get_tile_item(newTilePosition)
-	if tileItem == "food_i":
+	if tileItem in inventoryItems:
 		Main.tile_clear(newTilePosition)
 		print("yum")
 	elif tileItem == "rock_r":
