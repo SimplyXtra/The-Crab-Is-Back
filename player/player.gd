@@ -1,6 +1,7 @@
 extends Node2D
 
 var playerTilePosition := Vector2.ZERO
+var inventoryItems := ["stone", "wood", ""]
 
 func _process(_delta):
 	playerTilePosition = move()
