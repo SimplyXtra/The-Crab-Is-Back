@@ -11,12 +11,22 @@ onready var rock = load("res://resources/rock/rock.tscn")
 
 var rng = RandomNumberGenerator.new()
 
+var items = {
+	"food" : "food_i",
+	"rock" : "rock_i"
+}
+
+var resources = {
+	"rock" : "rock_r"
+}
+
 func _ready():
 	camera.position = tileset.size / 2
 	camera.zoom = Vector2.ONE / Main.tileScale
 	place_rock(Vector2(2, 1))
 	place_rock(Vector2(2, 2))
 	place_rock(Vector2(2, 3))
+	place_food()
 	place_food()
 
 func place_rock(rockPosition):
@@ -25,7 +35,7 @@ func place_rock(rockPosition):
 	var world = get_tree().current_scene
 	world.add_child(rockInstance)
 	rockInstance.position = rockPosition * Main.tileSize
-	Main.tile_set_item(rockPosition, "rock")
+	Main.tile_set_item(rockPosition, resources["rock"])
 
 func place_food():
 	var salad = food.instance()
@@ -40,7 +50,8 @@ func place_food():
 	var world = get_tree().current_scene
 	world.add_child(salad)
 	salad.position = foodPosition * Main.tileSize
+	salad.tilePosition = foodPosition
 	salad.connect("deleted", self, "place_food")
 	
-	Main.tile_set_item(foodPosition, "food")
+	Main.tile_set_item(foodPosition, items["food"])
 

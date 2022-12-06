@@ -5,7 +5,7 @@ var tileSize := 32
 var mapSize := Vector2(5, 5)
 
 var map = []
-signal tile_changed(oldItem)
+signal tile_changed(oldItem, tilePosition)
 #List of things: food, rock
 
 func _ready():
@@ -30,10 +30,10 @@ func tile_swap(tile1, tile2):
 func tile_set_item(tile, item):
 	var oldItem = map[tile.y][tile.x]
 	map[tile.y][tile.x] = item
-	emit_signal("tile_changed", oldItem)
+	emit_signal("tile_changed", oldItem, tile)
 
 func tile_clear(tile):
 	var oldItem = map[tile.y][tile.x]
 	map[tile.y][tile.x] = null
-	emit_signal("tile_changed", oldItem)
+	emit_signal("tile_changed", oldItem, tile)
 

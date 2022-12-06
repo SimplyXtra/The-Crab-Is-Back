@@ -1,7 +1,7 @@
 extends Node2D
 
 var playerTilePosition := Vector2.ZERO
-var inventoryItems := ["stone", "wood", ""]
+var inventoryItems := ["stone", "wood", "food"]
 
 func _process(_delta):
 	playerTilePosition = move()
@@ -14,21 +14,21 @@ func move():
 	
 	#Check movement location
 	var tileItem = Main.get_tile_item(newTilePosition)
-	if tileItem == "food":
+	if tileItem == "food_i":
 		Main.tile_clear(newTilePosition)
 		print("yum")
-	elif tileItem == "rock":
+	elif tileItem == "rock_r":
 		return playerTilePosition
 	return newTilePosition
 
 func get_tile_movement():
 	var movement := Vector2(0, 0)
-	if Input.is_action_just_pressed("ui_up"):
+	if Input.is_action_just_pressed("move_up"):
 		movement.y -= 1
-	if Input.is_action_just_pressed("ui_down"):
+	if Input.is_action_just_pressed("move_down"):
 		movement.y += 1
-	if Input.is_action_just_pressed("ui_left"):
+	if Input.is_action_just_pressed("move_left"):
 		movement.x -= 1
-	if Input.is_action_just_pressed("ui_right"):
+	if Input.is_action_just_pressed("move_right"):
 		movement.x += 1
 	return movement
