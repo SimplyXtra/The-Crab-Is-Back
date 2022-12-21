@@ -1,6 +1,6 @@
 extends Node2D
 
-var tileScale := 3.0
+var tileScale := 6.0
 var tileSize := 32
 var mapSize := Vector2(5, 5)
 
